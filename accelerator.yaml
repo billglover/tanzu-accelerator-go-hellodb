@@ -28,6 +28,22 @@ accelerator:
     required: true
 engine:
   merge:
+  - include: [ "config/*.yaml" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+      - text: "tanzu-go-hellodb"
+        with: "#artifactId.toLowerCase()"
+    - type: ReplaceText
+      substitutions:
+      - text: "{{CLASS_CLAIM}}"
+        with: "#dbClassClaim"
+    - merge:
+      - type: InvokeFragment
+        reference: tap-workload
+      - include: [ "**" ]
+      onConflict: UseFirst
+
   - include: ["go.mod"]
     chain:
     - type: ReplaceText
@@ -38,18 +54,4 @@ engine:
       regex:
         pattern: 'tanzu-go-hellodb'
         with: "#artifactId.toLowerCase()"
-  - include: [ "config/workload.yaml" ]
-    chain:
-    - type: ReplaceText
-      substitutions:
-      - text: "{{CLASS_CLAIM}}"
-        with: "#dbClassClaim"
-    - type: ReplaceText
-      substitutions:
-      - text: tanzu-go-hellodb
-        with: "#artifactId.toLowerCase()"
-    - merge:
-      - type: InvokeFragment
-        reference: tap-workload
-      - include: [ "**" ]
   - include: ["*.go"]

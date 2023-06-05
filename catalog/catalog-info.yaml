@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tanzu-go-hellodb
+  description: Tanzu does Go too!
+  tags:
+  - go
+  - helloworld
+  - http
+  - database
+  annotations:
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=tanzu-go-hellodb'
+spec:
+  type: service
+  lifecycle: experimental
+  owner: uki-tanzu-se-org

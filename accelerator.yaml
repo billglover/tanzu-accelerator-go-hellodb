@@ -30,6 +30,12 @@ engine:
   merge:
   - include: ["**/*"]
     exclude: ["config/*.yaml", "go.mod", ".*", "**/*.go"]
+  - include: [ "catalog/*.yaml" ]
+    chain:
+    - type: ReplaceText
+      substitutions:
+      - text: "tanzu-go-hellodb"
+        with: "#artifactId.toLowerCase()"
   - include: [ "**/*.go" ]
     chain:
     - type: ReplaceText

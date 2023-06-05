@@ -28,6 +28,8 @@ accelerator:
     required: true
 engine:
   merge:
+  - include: ["**/*"]
+    exclude: ["config/*.yaml", "go.mod", ".*"]
   - include: [ "config/*.yaml" ]
     chain:
     - type: ReplaceText
@@ -54,4 +56,3 @@ engine:
       regex:
         pattern: 'tanzu-go-hellodb'
         with: "#artifactId.toLowerCase()"
-  - include: ["*.go"]

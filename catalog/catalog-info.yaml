@@ -5,12 +5,11 @@ metadata:
   description: Tanzu does Go too!
   tags:
   - go
-  - helloworld
-  - http
-  - database
   annotations:
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=tanzu-go-hellodb'
 spec:
-  type: service
-  lifecycle: experimental
+  type: app
+  lifecycle: dev
   owner: uki-tanzu-se-org
+  dependsOn:
+  - "component:default/{{CLASS_CLAIM}}"

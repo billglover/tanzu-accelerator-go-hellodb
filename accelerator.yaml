@@ -4,7 +4,6 @@ accelerator:
   iconUrl: https://billglover.me/img/bill.dev.png
   tags:
   - go
-  - helloworld
   - http
   - database
   imports:
@@ -29,13 +28,17 @@ accelerator:
 engine:
   merge:
   - include: ["**/*"]
-    exclude: ["config/*.yaml", "go.mod", ".*", "**/*.go"]
+    exclude: ["config/*.yaml", "go.mod", ".*", "**/*.go", "README.md"]
   - include: [ "catalog/*.yaml" ]
     chain:
     - type: ReplaceText
       substitutions:
       - text: "tanzu-go-hellodb"
         with: "#artifactId.toLowerCase()"
+    - type: ReplaceText
+      substitutions:
+      - text: "{{CLASS_CLAIM}}"
+        with: "#dbClassClaim"
   - include: [ "**/*.go" ]
     chain:
     - type: ReplaceText
@@ -68,3 +71,5 @@ engine:
       regex:
         pattern: 'tanzu-go-hellodb'
         with: "#artifactId.toLowerCase()"
+
+  - include: ["README.md"]

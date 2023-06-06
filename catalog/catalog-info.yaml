@@ -8,8 +8,9 @@ metadata:
   annotations:
     'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=tanzu-go-hellodb'
 spec:
-  type: app
+  type: service
   lifecycle: dev
   owner: uki-tanzu-se-org
+  system: demo
   dependsOn:
   - "component:default/{{CLASS_CLAIM}}"
